@@ -4,6 +4,7 @@ import {
   Toolbar,
   ToolbarDivider,
 } from "@fluentui/react-components";
+import { BiSearch } from "react-icons/bi";
 
 const Header = () => {
   return (
@@ -13,7 +14,7 @@ const Header = () => {
         <Input
           size="medium"
           placeholder={"search"}
-          // contentAfter={<Search16Regular />}
+          contentAfter={<BiSearch />}
           style={{ border: 0 }}
         />
 
