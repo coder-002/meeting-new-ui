@@ -1,4 +1,4 @@
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/dashboard/Dashboard";
 import { Navigation_Routes } from "./routes.constant";
 import { useRoutes } from "react-router-dom";
 
