@@ -12,6 +12,7 @@
   "dependencies": {
     "@fluentui/react-components": "^9.54.17",
     "axios": "^1.7.7",
+    "classnames": "^2.5.1",
     "google-input-tool": "^1.4.3",
     "input-tool-helper": "^0.0.1",
     "jotai": "^2.10.0",

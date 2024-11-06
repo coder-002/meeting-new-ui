@@ -18,6 +18,7 @@ import {
 import { ReactNode, useEffect, useState } from "react";
 import { DataTableProps } from "./table";
 import { debounce } from "lodash";
+import Pagination from "./pagination";
 
 const useStyles = makeStyles({
   root: {
@@ -35,6 +36,8 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
   const styles = useStyles();
   const [cols, setCols] = useState<TableColumnDefinition<T>[]>([]);
   const [selectedItems, setSelectedItems] = useState<T[]>([]);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const debouncedSearch =
     props.setSearchValue !== undefined
@@ -93,6 +96,9 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
     };
   });
 
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedData = rows.slice(startIndex, startIndex + pageSize);
+
   const init = () => {
     const columns: TableColumnDefinition<T>[] = props.columns.map((x) =>
       createTableColumn<T>({
@@ -144,7 +150,7 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map(
+          {paginatedData.map(
             ({ item, selected, onClick, onKeyDown, appearance }, index) => (
               <TableRow
                 key={index}
@@ -166,6 +172,15 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
           )}
         </TableBody>
       </Table>
+      <div>
+        <Pagination
+          currentPage={currentPage}
+          totalCount={props.data.length - 1}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          onPageChange={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };
