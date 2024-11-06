@@ -175,7 +175,7 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
       <div>
         <Pagination
           currentPage={currentPage}
-          totalCount={props.data.length - 1}
+          totalCount={props.data.length}
           pageSize={pageSize}
           setPageSize={setPageSize}
           onPageChange={setCurrentPage}

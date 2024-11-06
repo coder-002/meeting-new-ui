@@ -1,7 +1,7 @@
 import TableComp from "../../components/table/TableComp";
 
 export default function Dashboard() {
-  const columns = [
+  const col: any = [
     { dataKey: "id", label: "ID" },
     { dataKey: "name", label: "Name" },
     { dataKey: "email", label: "Email" },
@@ -116,5 +116,5 @@ export default function Dashboard() {
     },
   ];
 
-  return <TableComp columns={columns} data={data} />;
+  return <TableComp columns={col} data={data} selectionMode="single" />;
 }
