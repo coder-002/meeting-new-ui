@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     gap: "2px",
-    maxWidth: "20%",
+    width: "100%",
   },
   label: {
     fontWeight: "bold",
@@ -121,8 +121,8 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
   }, [props.columns]);
 
   return (
-    <div>
-      <div className={styles.root}>
+    <div className={styles.root}>
+      <div>
         <Label className={styles.label}>Search</Label>
         <Input
           value={props.searchValue}

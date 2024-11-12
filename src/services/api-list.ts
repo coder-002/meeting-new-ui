@@ -4,4 +4,9 @@ export const api = {
     getUpcomingMeeting: "/dashboard/upcomingmeetings",
     getPastMeeting: "/dashboard/pastmeetings",
   },
+  setup: {
+    organization: {
+      get: "/org",
+    },
+  },
 };
