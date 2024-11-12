@@ -11,3 +11,26 @@ export const redirectToLogin = async () => {
   );
   if (res) location.href = res.data;
 };
+
+export function getRefreshToken() {
+  const jwtToken = getToken();
+  if (!jwtToken) return "";
+  const jwt = JSON.parse(atob(jwtToken.split(".")[1]));
+  return jwt.rid;
+}
+
+export const isRunningOnLocalhost = (target?: string) => {
+  const actualBaseUrl =
+    target ??
+    window.location.origin
+      .replace("http://", "")
+      .replace("https://", "")
+      .split("/")[0];
+
+  return (
+    actualBaseUrl.startsWith("localhost") ||
+    actualBaseUrl.startsWith("127.0.0.1") ||
+    actualBaseUrl.startsWith("192.168.") ||
+    actualBaseUrl.startsWith("0.0.0.0")
+  );
+};

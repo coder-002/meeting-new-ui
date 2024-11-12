@@ -1,15 +1,25 @@
 import {
+  Body1Stronger,
   Button,
   Input,
+  makeStyles,
   Toolbar,
   ToolbarDivider,
 } from "@fluentui/react-components";
 import { BiSearch } from "react-icons/bi";
 
+const useStyles = makeStyles({
+  nav: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+});
+
 const Header = () => {
+  const styles = useStyles();
   return (
-    <div>
-      <h1>Home</h1>
+    <div className={styles.nav}>
+      <Body1Stronger>Home</Body1Stronger>
       <Toolbar>
         <Input
           size="medium"

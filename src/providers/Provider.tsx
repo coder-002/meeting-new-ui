@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
+import AuthContextProvider from "../contexts/AuthContextProvider";
 
 interface Props {
   children: ReactNode | ReactNode[];
@@ -12,9 +13,11 @@ const Provider = ({ children }: Props) => {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <FluentProvider theme={teamsLightTheme}>
-          <Layout>{children}</Layout>
-        </FluentProvider>
+        <AuthContextProvider>
+          <FluentProvider theme={teamsLightTheme}>
+            <Layout>{children}</Layout>
+          </FluentProvider>
+        </AuthContextProvider>
       </QueryClientProvider>
     </BrowserRouter>
   );
