@@ -4,7 +4,7 @@ import { useGetOrganization } from "../../../services/setup/service-organization
 const OrganizationPage = () => {
   const { data } = useGetOrganization();
 
-  const columns = [
+  const columns: any = [
     { dataKey: "fullName", label: "full_name" },
     { dataKey: "nickName", label: "nick_name" },
     {

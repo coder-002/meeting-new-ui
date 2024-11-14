@@ -26,27 +26,17 @@ import { ReactNode, useState } from "react";
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    flexDirection: "row",
-    "@media (max-width: 768px)": {
-      flexDirection: "column",
-    },
+    display: "grid",
+    gridTemplateColumns: "1fr 9fr",
   },
   tabListContainer: {
-    width: "250px",
-    "@media (max-width: 768px)": {
-      width: "100%",
-      overflowX: "auto",
-      whiteSpace: "nowrap",
-    },
+    width: "200px",
   },
   content: {
     flex: "1",
-    padding: "16px",
-    backgroundColor: "red",
-    "@media (max-width: 768px)": {
-      padding: "8px",
-    },
+    padding: "8px",
+    width: "100%",
+    overflowX: "auto",
   },
 });
 

@@ -30,6 +30,10 @@ const useStyles = makeStyles({
   label: {
     fontWeight: "bold",
   },
+  tableWrapper: {
+    width: "100%",
+    overflowX: "auto",
+  },
 });
 
 const TableComp = <T extends object>(props: DataTableProps<T>) => {
@@ -131,47 +135,55 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
           }}
         />
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableSelectionCell
-              checked={
-                allRowsSelected ? true : someRowsSelected ? "mixed" : false
-              }
-              onClick={toggleAllRows}
-              checkboxIndicator={{ "aria-label": "Select all rows " }}
-              invisible={props.selectionMode == "single" ? true : false}
-            />
-            {cols.map((column) => (
-              <TableHeaderCell key={column.columnId}>
-                <strong> {column.renderHeaderCell()}</strong>
-              </TableHeaderCell>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {paginatedData.map(
-            ({ item, selected, onClick, onKeyDown, appearance }, index) => (
-              <TableRow
-                key={index}
-                onClick={onClick}
-                onKeyDown={onKeyDown}
-                appearance={appearance}
-              >
-                <TableSelectionCell
-                  checked={selected}
-                  type={props.selectionMode == "single" ? "radio" : "checkbox"}
-                />
-                {cols.map((column) => (
-                  <TableCell key={column.columnId}>
-                    {column.renderCell(item)}
-                  </TableCell>
-                ))}
-              </TableRow>
-            )
-          )}
-        </TableBody>
-      </Table>
+      <div className={styles.tableWrapper}>
+        <Table style={{ minWidth: "1000px" }}>
+          <TableHeader>
+            <TableRow>
+              <TableSelectionCell
+                checked={
+                  allRowsSelected ? true : someRowsSelected ? "mixed" : false
+                }
+                onClick={toggleAllRows}
+                checkboxIndicator={{ "aria-label": "Select all rows " }}
+                invisible={props.selectionMode == "single" ? true : false}
+              />
+              {cols.map((column) => (
+                <TableHeaderCell
+                  key={column.columnId}
+                  style={{ padding: "5px" }}
+                >
+                  <strong> {column.renderHeaderCell()}</strong>
+                </TableHeaderCell>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {paginatedData.map(
+              ({ item, selected, onClick, onKeyDown, appearance }, index) => (
+                <TableRow
+                  key={index}
+                  onClick={onClick}
+                  onKeyDown={onKeyDown}
+                  appearance={appearance}
+                >
+                  <TableSelectionCell
+                    checked={selected}
+                    type={
+                      props.selectionMode == "single" ? "radio" : "checkbox"
+                    }
+                  />
+                  {cols.map((column) => (
+                    <TableCell key={column.columnId}>
+                      {column.renderCell(item)}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              )
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
       <div>
         <Pagination
           currentPage={currentPage}

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface DataTable<T extends object> {
+export interface DataTable<T> {
   dataKey: keyof T;
   compare?: (a: T, b: T) => number;
   renderHeaderCell?: (data?: unknown) => ReactNode;
