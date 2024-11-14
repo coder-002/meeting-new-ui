@@ -1,4 +1,5 @@
 import TableComp from "../../../components/table/TableComp";
+
 import { useGetOrganization } from "../../../services/setup/service-organization";
 
 const OrganizationPage = () => {

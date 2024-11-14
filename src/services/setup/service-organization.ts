@@ -11,6 +11,7 @@ const useGetOrganization = () => {
   return useQuery(api.setup.organization.get, getOrganization, {
     onSuccess: (data) => data.data,
     onError: (error) => console.error(error),
+    refetchOnWindowFocus: false,
   });
 };
 
