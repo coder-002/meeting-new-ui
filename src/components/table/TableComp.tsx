@@ -40,9 +40,9 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
   const styles = useStyles();
   const [cols, setCols] = useState<TableColumnDefinition<T>[]>([]);
   const [selectedItems, setSelectedItems] = useState<T[]>([]);
-  const [pageSize, setPageSize] = useState<number>(10);
-  const [currentPage, setCurrentPage] = useState<number>(1);
 
+  const currentPage = props.currentPage ?? 1;
+  const pageSize = props.pageSize ?? 10;
   const debouncedSearch =
     props.setSearchValue !== undefined
       ? debounce((value: string) => props.setSearchValue!(value), 1000)
@@ -184,15 +184,17 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
         </Table>
       </div>
 
-      <div>
-        <Pagination
-          currentPage={currentPage}
-          totalCount={props.data.length}
-          pageSize={pageSize}
-          setPageSize={setPageSize}
-          onPageChange={setCurrentPage}
-        />
-      </div>
+      {paginatedData.length > 10 && (
+        <div>
+          <Pagination
+            currentPage={currentPage}
+            totalCount={props.data.length}
+            pageSize={pageSize}
+            setPageSize={props.setPageSize}
+            onPageChange={props.setCurrentPage}
+          />
+        </div>
+      )}
     </div>
   );
 };

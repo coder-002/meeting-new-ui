@@ -16,4 +16,8 @@ export interface DataTableProps<T extends object> {
   onRowClick?: (item: T | T[]) => void;
   searchValue?: string;
   setSearchValue?: (x: string) => void;
+  pageSize?: number;
+  currentPage?: number;
+  setPageSize?: (x: number) => void;
+  setCurrentPage?: (x: number) => void;
 }

@@ -152,7 +152,7 @@ const SetupPage = ({ children }: { children: ReactNode }) => {
     },
   ];
 
-  const handleSelect = (event: SelectTabEvent, data: SelectTabData) => {
+  const handleSelect = (_: SelectTabEvent, data: SelectTabData) => {
     setSelectedValue(data.value);
   };
 

@@ -8,5 +8,25 @@ export const api = {
     organization: {
       get: "/org",
     },
+    unit: {
+      get: "/org/units",
+      post: "/org/unit",
+      getUnitPagination: "/org/unit/filter",
+    },
+    branch: {
+      getBranchPagination: "/org/branch/filter",
+    },
+    committee: {
+      getCommitteePagination: "/committee/filter",
+    },
+    designation: {
+      getDesignationPagination: "/designation/filter",
+    },
+    deduction: {
+      getDeductionPagination: "/deduct/filter",
+    },
+    distance: {
+      getDistancePagination: "/distance/filter",
+    },
   },
 };
