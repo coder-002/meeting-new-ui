@@ -46,7 +46,6 @@ const Pagination = (props: any) => {
         onChange={(_, data) => {
           setPageSize(data.value);
         }}
-        
       >
         <option>10</option>
         <option>20</option>
