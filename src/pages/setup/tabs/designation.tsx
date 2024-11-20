@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import TableComp from "../../../components/table/TableComp";
 import { useGetDesignationFilter } from "../../../services/setup/service-designation";
 import { IDesignation } from "../../../models/setup/designation/designation";
+import { useLocale } from "../../../contexts/LocaleContextProvider";
 
 const Designation = () => {
+  const localize = useLocale();
   const { mutateAsync: getDesignation } = useGetDesignationFilter();
   const [data, setData] = useState<IDesignation[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -27,11 +29,11 @@ const Designation = () => {
   }, [pageNumber, pageSize, searchText]);
 
   const cols: any = [
-    { dataKey: "rank", label: "rank" },
-    { dataKey: "designationName", label: "designation_name" },
+    { dataKey: "rank", label: localize("rank") },
+    { dataKey: "designationName", label: localize("designation_name") },
     {
       dataKey: "isActive",
-      label: "status",
+      label: localize("status"),
       render: (item: any) => {
         return (
           <Badge

@@ -3,8 +3,10 @@ import TableComp from "../../../../components/table/TableComp";
 import { useEffect, useState } from "react";
 import { useGetCommitteeFilter } from "../../../../services/setup/committee/service-committee";
 import { ICommittee } from "../../../../models/setup/committee/committee";
+import { useLocale } from "../../../../contexts/LocaleContextProvider";
 
 const Committee = () => {
+  const localize = useLocale();
   const [data, setData] = useState<ICommittee[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -27,12 +29,12 @@ const Committee = () => {
   }, [pageNumber, pageSize, searchText]);
 
   const cols: any = [
-    { dataKey: "rank", label: "rank" },
-    { dataKey: "unitName", label: "unit_name" },
-    { dataKey: "branchName", label: "branch_name" },
+    { dataKey: "rank", label: localize("rank") },
+    { dataKey: "unitName", label: localize("unit_name") },
+    { dataKey: "branchName", label: localize("branch_name") },
     {
       dataKey: "typeId",
-      label: "committee_type",
+      label: localize("committee_type"),
       // render: (item: any) => {
       //   return (
       //     <>
@@ -41,11 +43,11 @@ const Committee = () => {
       //   );
       // },
     },
-    { dataKey: "committeeCode", label: "committee_code" },
-    { dataKey: "committeeName", label: "committee_name" },
+    { dataKey: "committeeCode", label: localize("committee_code") },
+    { dataKey: "committeeName", label: localize("committee_name") },
     {
       dataKey: "isActive",
-      label: "status",
+      label: localize("status"),
       render: (item: any) => {
         return (
           <Badge
@@ -59,7 +61,7 @@ const Committee = () => {
         );
       },
     },
-    { dataKey: "description", label: "description" },
+    { dataKey: "description", label: localize("description") },
   ];
   return (
     <div>

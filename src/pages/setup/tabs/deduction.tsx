@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import TableComp from "../../../components/table/TableComp";
 import { IDeduction } from "../../../models/setup/deduction/deduction";
 import { useGetDeductionFilter } from "../../../services/setup/service-deduction";
+import { useLocale } from "../../../contexts/LocaleContextProvider";
 
 const Deduction = () => {
+  const localize = useLocale();
   const { mutateAsync: getDeduction } = useGetDeductionFilter();
   const [data, setData] = useState<IDeduction[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -26,11 +28,11 @@ const Deduction = () => {
   }, [pageNumber, pageSize, searchText]);
 
   const cols: any = [
-    { dataKey: "deductTitle", label: "deduction_title" },
+    { dataKey: "deductTitle", label: localize("deduction_title") },
     // { dataKey: "rate", label: ("rate") },
-    { dataKey: "amount", label: "amount" },
-    { dataKey: "description", label: "description" },
-    { dataKey: "type", label: "type" },
+    { dataKey: "amount", label: localize("amount") },
+    { dataKey: "description", label: localize("description") },
+    { dataKey: "type", label: localize("type") },
   ];
   return (
     <div>

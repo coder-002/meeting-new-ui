@@ -3,8 +3,10 @@ import TableComp from "../../../components/table/TableComp";
 import { useEffect, useState } from "react";
 import { IBranch } from "../../../models/setup/branch/branch";
 import { useGetBranchfilter } from "../../../services/setup/service-branch";
+import { useLocale } from "../../../contexts/LocaleContextProvider";
 
 const Branch = () => {
+  const localize = useLocale();
   const [data, setData] = useState<IBranch[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -28,15 +30,15 @@ const Branch = () => {
   const cols: any = [
     {
       dataKey: "branchCode",
-      label: "branch_code",
+      label: localize("branch_code"),
     },
     {
       dataKey: "branchName",
-      label: "branch_name",
+      label: localize("branch_name"),
     },
     {
       dataKey: "orgUnitName",
-      label: "unit_name",
+      label: localize("unit_name"),
       //   render: (item: any) => {
       //     return (
       //       <>
@@ -50,15 +52,15 @@ const Branch = () => {
     },
     {
       dataKey: "address",
-      label: "address",
+      label: localize("address"),
     },
     {
       dataKey: "contactNumber",
-      label: "contact_number",
+      label: localize("contact_number"),
     },
     {
       dataKey: "isActive",
-      label: "status",
+      label: localize("status"),
       render: (item: any) => {
         return (
           <Badge

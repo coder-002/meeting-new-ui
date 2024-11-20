@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import AuthContextProvider from "../contexts/AuthContextProvider";
+import LocaleContextProvider from "../contexts/LocaleContextProvider";
 
 interface Props {
   children: ReactNode | ReactNode[];
@@ -11,15 +12,17 @@ interface Props {
 const queryClient = new QueryClient();
 const Provider = ({ children }: Props) => {
   return (
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <AuthContextProvider>
-          <FluentProvider theme={teamsLightTheme}>
-            <Layout>{children}</Layout>
-          </FluentProvider>
-        </AuthContextProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <LocaleContextProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <AuthContextProvider>
+            <FluentProvider theme={teamsLightTheme}>
+              <Layout>{children}</Layout>
+            </FluentProvider>
+          </AuthContextProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </LocaleContextProvider>
   );
 };
 

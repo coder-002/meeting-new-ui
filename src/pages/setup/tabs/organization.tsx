@@ -1,25 +1,27 @@
 import TableComp from "../../../components/table/TableComp";
+import { useLocale } from "../../../contexts/LocaleContextProvider";
 
 import { useGetOrganization } from "../../../services/setup/service-organization";
 
 const OrganizationPage = () => {
+  const localize = useLocale();
   const { data } = useGetOrganization();
 
   const columns: any = [
-    { dataKey: "fullName", label: "full_name" },
-    { dataKey: "nickName", label: "nick_name" },
+    { dataKey: "fullName", label: localize("full_name") },
+    { dataKey: "nickName", label: localize("nick_name") },
     {
       dataKey: "registrationDate",
-      label: "registration_date",
+      label: localize("registration_date"),
     },
     {
       dataKey: "registrationNumber",
-      label: "registration_number",
+      label: localize("registration_number"),
     },
-    { dataKey: "panNumber", label: "pan_number" },
-    { dataKey: "contactPerson", label: "contact_person" },
-    { dataKey: "contactNumber", label: "contact_number" },
-    { dataKey: "address", label: "address" },
+    { dataKey: "panNumber", label: localize("pan_number") },
+    { dataKey: "contactPerson", label: localize("contact_person") },
+    { dataKey: "contactNumber", label: localize("contact_number") },
+    { dataKey: "address", label: localize("address") },
   ];
   return (
     <div>

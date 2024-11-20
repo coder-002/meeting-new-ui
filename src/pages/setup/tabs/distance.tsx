@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { IDistance } from "../../../models/setup/distance/distance";
 import { useGetDistanceFilter } from "../../../services/setup/service-distance";
 import TableComp from "../../../components/table/TableComp";
+import { useLocale } from "../../../contexts/LocaleContextProvider";
 
 const Distance = () => {
+  const localize = useLocale();
   const { mutateAsync: getDesignation } = useGetDistanceFilter();
   const [data, setData] = useState<IDistance[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -28,7 +30,7 @@ const Distance = () => {
   const cols: any = [
     {
       dataKey: "fromBranch",
-      label: "from_branch",
+      label: localize("from_branch"),
       //   render: (item: any) => {
       //     return (
       //       <>
@@ -41,7 +43,7 @@ const Distance = () => {
     },
     {
       dataKey: "toBranch",
-      label: "to_branch",
+      label: localize("to_branch"),
       //   render: (item) => {
       //     return (
       //       <>
@@ -52,8 +54,8 @@ const Distance = () => {
       //     );
       //   },
     },
-    { dataKey: "kiloMeter", label: "distance_inkm" },
-    { dataKey: "description", label: "description" },
+    { dataKey: "kiloMeter", label: localize("distance_inkm") },
+    { dataKey: "description", label: localize("description") },
   ];
   return (
     <div>

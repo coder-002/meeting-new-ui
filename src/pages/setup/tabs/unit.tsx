@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import TableComp from "../../../components/table/TableComp";
 import { useGetUnitFilter } from "../../../services/setup/service-unit";
 import { IUnit } from "../../../models/setup/unit/unit";
+import { useLocale } from "../../../contexts/LocaleContextProvider";
 
 const BusinessUnit = () => {
+  const localize = useLocale();
   const { mutateAsync: getBusinessUnit } = useGetUnitFilter();
   const [data, setData] = useState<IUnit[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -29,19 +31,19 @@ const BusinessUnit = () => {
   const cols: any = [
     {
       dataKey: "unitName",
-      label: "unit_name",
+      label: localize("unit_name"),
     },
     {
       dataKey: "registrationDate",
-      label: "registration_date",
+      label: localize("registration_date"),
     },
     {
       dataKey: "address",
-      label: "address",
+      label: localize("address"),
     },
     {
       dataKey: "isActive",
-      label: "status",
+      label: localize("status"),
       render: (item: any) => {
         return (
           <Badge

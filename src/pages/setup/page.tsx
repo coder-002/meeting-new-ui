@@ -23,6 +23,7 @@ import {
   TrayItemRemove20Filled,
 } from "@fluentui/react-icons";
 import { ReactNode, useState } from "react";
+import { useLocale } from "../../contexts/LocaleContextProvider";
 
 const useStyles = makeStyles({
   root: {
@@ -41,47 +42,48 @@ const useStyles = makeStyles({
 });
 
 const SetupPage = ({ children }: { children: ReactNode }) => {
+  const localize = useLocale();
   const styles = useStyles();
   const [selectedValue, setSelectedValue] = useState<TabValue>("organization");
-  const tabList = [
+  const tablist = [
     {
       id: "1",
-      label: "Organization",
+      label: localize("organization"),
       value: "organization",
       icon: <Organization16Filled />,
       url: Navigation_Routes.organization,
     },
     {
       id: "2",
-      label: "business_unit",
+      label: localize("business_unit"),
       value: "organizationUnit",
       icon: <Signature16Filled />,
       url: Navigation_Routes.unit,
     },
     {
       id: "3",
-      label: "branch",
+      label: localize("branch"),
       value: "organizationBranch",
       icon: <Branch16Filled />,
       url: Navigation_Routes.branch,
     },
     {
       id: "4",
-      label: "committee",
+      label: localize("committee"),
       value: "committee",
       icon: <Group20Filled />,
       url: Navigation_Routes.committee,
     },
     {
       id: "5",
-      label: "designation",
+      label: localize("designation"),
       value: "designation",
       icon: <PositionToBack20Filled />,
       url: Navigation_Routes.designation,
     },
     {
       id: "6",
-      label: "deduction",
+      label: localize("deduction"),
       value: "deduction",
       icon: <TrayItemRemove20Filled />,
       url: Navigation_Routes.deduction,
@@ -89,63 +91,63 @@ const SetupPage = ({ children }: { children: ReactNode }) => {
 
     {
       id: "7",
-      label: "distance",
+      label: localize("distance"),
       value: "distance",
       icon: <ArrowRouting20Filled />,
       url: Navigation_Routes.distance,
     },
     {
       id: "8",
-      label: "users",
+      label: localize("users"),
       value: "user",
       icon: <People20Filled />,
       url: Navigation_Routes.user,
     },
     {
       id: "9",
-      label: "committee_type",
+      label: localize("committee_type"),
       value: "committeeType",
       icon: <GroupList20Filled />,
       url: Navigation_Routes.committee_type,
     },
     {
       id: "10",
-      label: "meeting_type",
+      label: localize("meeting_type"),
       value: "meetingType",
       icon: <PeopleAudienceFilled />,
       url: Navigation_Routes.meeting_type,
     },
     {
       id: "11",
-      label: "fiscal_year",
+      label: localize("fiscal_year"),
       value: "fiscalYear",
       icon: <CalendarLtr20Filled />,
       url: Navigation_Routes.fiscal_year,
     },
     {
       id: "12",
-      label: "allowance_type",
+      label: localize("allowance_type"),
       value: "allowanceType",
       icon: <ReceiptMoney20Filled />,
       url: Navigation_Routes.allowance_type,
     },
     {
       id: "13",
-      label: "document_type",
+      label: localize("document_type"),
       value: "documentType",
       icon: <Document10020Filled />,
       url: Navigation_Routes.document_type,
     },
     {
       id: "14",
-      label: "allowance_setup",
+      label: localize("allowance_setup"),
       value: "allowance",
       icon: <Document10020Filled />,
       url: Navigation_Routes.setup_allowance,
     },
     {
       id: "15",
-      label: "telephone_allowance",
+      label: localize("telephone_allowance"),
       value: "telephoneAllowance",
       icon: <Phone12Filled />,
       url: Navigation_Routes.telephone_allowance,
@@ -160,7 +162,7 @@ const SetupPage = ({ children }: { children: ReactNode }) => {
     <div className={styles.root}>
       <div className={styles.tabListContainer}>
         <TabList
-          tabs={tabList || []}
+          tabs={tablist || []}
           onTabSelect={handleSelect}
           selectedValue={selectedValue}
           vertical
