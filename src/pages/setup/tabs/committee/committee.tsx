@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useGetCommitteeFilter } from "../../../../services/setup/committee/service-committee";
 import { ICommittee } from "../../../../models/setup/committee/committee";
 import { useLocale } from "../../../../contexts/LocaleContextProvider";
+import { DataTable } from "../../../../components/table/table";
 
 const Committee = () => {
   const localize = useLocale();
@@ -28,7 +29,7 @@ const Committee = () => {
     getData();
   }, [pageNumber, pageSize, searchText]);
 
-  const cols: any = [
+  const cols: DataTable<ICommittee>[] = [
     { dataKey: "rank", label: localize("rank") },
     { dataKey: "unitName", label: localize("unit_name") },
     { dataKey: "branchName", label: localize("branch_name") },

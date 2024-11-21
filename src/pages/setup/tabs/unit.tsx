@@ -4,6 +4,7 @@ import TableComp from "../../../components/table/TableComp";
 import { useGetUnitFilter } from "../../../services/setup/service-unit";
 import { IUnit } from "../../../models/setup/unit/unit";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
+import { DataTable } from "../../../components/table/table";
 
 const BusinessUnit = () => {
   const localize = useLocale();
@@ -28,7 +29,7 @@ const BusinessUnit = () => {
     getData();
   }, [pageNumber, pageSize, searchText]);
 
-  const cols: any = [
+  const cols: DataTable<IUnit>[] = [
     {
       dataKey: "unitName",
       label: localize("unit_name"),

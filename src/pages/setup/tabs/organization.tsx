@@ -1,5 +1,7 @@
+import { DataTable } from "../../../components/table/table";
 import TableComp from "../../../components/table/TableComp";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
+import { IOrganization } from "../../../models/setup/organization/organization";
 
 import { useGetOrganization } from "../../../services/setup/service-organization";
 
@@ -7,7 +9,7 @@ const OrganizationPage = () => {
   const localize = useLocale();
   const { data } = useGetOrganization();
 
-  const columns: any = [
+  const columns: DataTable<IOrganization>[] = [
     { dataKey: "fullName", label: localize("full_name") },
     { dataKey: "nickName", label: localize("nick_name") },
     {
@@ -27,7 +29,7 @@ const OrganizationPage = () => {
     <div>
       <TableComp
         columns={columns}
-        data={[data?.data || []]}
+        data={data?.data ? [data?.data] : []}
         selectionMode="single"
       />
     </div>

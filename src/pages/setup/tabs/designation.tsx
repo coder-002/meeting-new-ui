@@ -4,6 +4,7 @@ import TableComp from "../../../components/table/TableComp";
 import { useGetDesignationFilter } from "../../../services/setup/service-designation";
 import { IDesignation } from "../../../models/setup/designation/designation";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
+import { DataTable } from "../../../components/table/table";
 
 const Designation = () => {
   const localize = useLocale();
@@ -28,7 +29,7 @@ const Designation = () => {
     getData();
   }, [pageNumber, pageSize, searchText]);
 
-  const cols: any = [
+  const cols: DataTable<IDesignation>[] = [
     { dataKey: "rank", label: localize("rank") },
     { dataKey: "designationName", label: localize("designation_name") },
     {

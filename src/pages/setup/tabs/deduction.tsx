@@ -3,6 +3,7 @@ import TableComp from "../../../components/table/TableComp";
 import { IDeduction } from "../../../models/setup/deduction/deduction";
 import { useGetDeductionFilter } from "../../../services/setup/service-deduction";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
+import { DataTable } from "../../../components/table/table";
 
 const Deduction = () => {
   const localize = useLocale();
@@ -27,12 +28,11 @@ const Deduction = () => {
     getData();
   }, [pageNumber, pageSize, searchText]);
 
-  const cols: any = [
+  const cols: DataTable<IDeduction>[] = [
     { dataKey: "deductTitle", label: localize("deduction_title") },
-    // { dataKey: "rate", label: ("rate") },
     { dataKey: "amount", label: localize("amount") },
     { dataKey: "description", label: localize("description") },
-    { dataKey: "type", label: localize("type") },
+    { dataKey: "isCompulsory", label: localize("type") },
   ];
   return (
     <div>

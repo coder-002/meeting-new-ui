@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { IBranch } from "../../../models/setup/branch/branch";
 import { useGetBranchfilter } from "../../../services/setup/service-branch";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
+import { DataTable } from "../../../components/table/table";
 
 const Branch = () => {
   const localize = useLocale();
@@ -27,7 +28,7 @@ const Branch = () => {
   useEffect(() => {
     getData();
   }, [pageNumber, pageSize, searchText]);
-  const cols: any = [
+  const cols: DataTable<IBranch>[] = [
     {
       dataKey: "branchCode",
       label: localize("branch_code"),
@@ -37,7 +38,7 @@ const Branch = () => {
       label: localize("branch_name"),
     },
     {
-      dataKey: "orgUnitName",
+      dataKey: "orgUnitId",
       label: localize("unit_name"),
       //   render: (item: any) => {
       //     return (

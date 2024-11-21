@@ -3,6 +3,7 @@ import { IDistance } from "../../../models/setup/distance/distance";
 import { useGetDistanceFilter } from "../../../services/setup/service-distance";
 import TableComp from "../../../components/table/TableComp";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
+import { DataTable } from "../../../components/table/table";
 
 const Distance = () => {
   const localize = useLocale();
@@ -27,7 +28,7 @@ const Distance = () => {
     getData();
   }, [pageNumber, pageSize, searchText]);
 
-  const cols: any = [
+  const cols: DataTable<IDistance>[] = [
     {
       dataKey: "fromBranch",
       label: localize("from_branch"),
