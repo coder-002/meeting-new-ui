@@ -14,6 +14,7 @@ export const api = {
       getUnitPagination: "/org/unit/filter",
     },
     branch: {
+      getAllBranches: "/org/branches",
       getBranchPagination: "/org/branch/filter",
     },
     committee: {
