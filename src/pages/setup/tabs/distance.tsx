@@ -4,10 +4,12 @@ import { useGetDistanceFilter } from "../../../services/setup/service-distance";
 import TableComp from "../../../components/table/TableComp";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
 import { DataTable } from "../../../components/table/table";
+import { useGetAllBranches } from "../../../services/setup/service-branch";
 
 const Distance = () => {
   const localize = useLocale();
   const { mutateAsync: getDesignation } = useGetDistanceFilter();
+  const { data: branchData } = useGetAllBranches();
   const [data, setData] = useState<IDistance[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -32,28 +34,29 @@ const Distance = () => {
     {
       dataKey: "fromBranch",
       label: localize("from_branch"),
-      //   render: (item: any) => {
-      //     return (
-      //       <>
-      //         {branchData &&
-      //           branchData?.find((branch) => branch?.id === item?.fromBranch)
-      //             ?.branchName}
-      //       </>
-      //     );
-      //   },
+      render: (item: IDistance) => {
+        return (
+          <>
+            {branchData &&
+              branchData?.data?.find(
+                (branch) => branch?.id === item?.fromBranch
+              )?.branchName}
+          </>
+        );
+      },
     },
     {
       dataKey: "toBranch",
       label: localize("to_branch"),
-      //   render: (item) => {
-      //     return (
-      //       <>
-      //         {branchData &&
-      //           branchData?.find((branch) => branch?.id === item?.toBranch)
-      //             ?.branchName}
-      //       </>
-      //     );
-      //   },
+      render: (item: IDistance) => {
+        return (
+          <>
+            {branchData &&
+              branchData?.data?.find((branch) => branch?.id === item?.toBranch)
+                ?.branchName}
+          </>
+        );
+      },
     },
     { dataKey: "kiloMeter", label: localize("distance_inkm") },
     { dataKey: "description", label: localize("description") },

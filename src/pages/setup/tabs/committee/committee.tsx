@@ -5,6 +5,10 @@ import { useGetCommitteeFilter } from "../../../../services/setup/committee/serv
 import { ICommittee } from "../../../../models/setup/committee/committee";
 import { useLocale } from "../../../../contexts/LocaleContextProvider";
 import { DataTable } from "../../../../components/table/table";
+import { useGetAllBranches } from "../../../../services/setup/service-branch";
+import { useGetAllUnits } from "../../../../services/setup/service-unit";
+import { IUnit } from "../../../../models/setup/unit/unit";
+import { IBranch } from "../../../../models/setup/branch/branch";
 
 const Committee = () => {
   const localize = useLocale();
@@ -13,6 +17,8 @@ const Committee = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchText, setSearchText] = useState<string>();
   const { mutateAsync: getBranchFilter } = useGetCommitteeFilter();
+  const { data: branchData } = useGetAllBranches();
+  const { data: unitData } = useGetAllUnits();
 
   async function getData() {
     const data = await getBranchFilter({
@@ -31,8 +37,35 @@ const Committee = () => {
 
   const cols: DataTable<ICommittee>[] = [
     { dataKey: "rank", label: localize("rank") },
-    { dataKey: "unitName", label: localize("unit_name") },
-    { dataKey: "branchName", label: localize("branch_name") },
+    {
+      dataKey: "unitName",
+      label: localize("unit_name"),
+      render: (item: ICommittee) => {
+        return (
+          <>
+            {
+              unitData?.data?.find((unit: IUnit) => unit.id == item.unitId)
+                ?.unitName
+            }
+          </>
+        );
+      },
+    },
+    {
+      dataKey: "branchName",
+      label: localize("branch_name"),
+      render: (item: ICommittee) => {
+        return (
+          <>
+            {
+              branchData?.data?.find(
+                (unit: IBranch) => unit.id == item.branchId
+              )?.branchName
+            }
+          </>
+        );
+      },
+    },
     {
       dataKey: "typeId",
       label: localize("committee_type"),

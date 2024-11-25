@@ -5,6 +5,8 @@ import { IBranch } from "../../../models/setup/branch/branch";
 import { useGetBranchfilter } from "../../../services/setup/service-branch";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
 import { DataTable } from "../../../components/table/table";
+import { useGetAllUnits } from "../../../services/setup/service-unit";
+import { IUnit } from "../../../models/setup/unit/unit";
 
 const Branch = () => {
   const localize = useLocale();
@@ -13,6 +15,7 @@ const Branch = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchText, setSearchText] = useState<string>();
   const { mutateAsync: getBranchFilter } = useGetBranchfilter();
+  const { data: unitData } = useGetAllUnits();
 
   async function getData() {
     const data = await getBranchFilter({
@@ -40,16 +43,16 @@ const Branch = () => {
     {
       dataKey: "orgUnitId",
       label: localize("unit_name"),
-      //   render: (item: any) => {
-      //     return (
-      //       <>
-      //         {
-      //           unitData.find((unit: IUnit) => unit.id == item.orgUnitId)
-      //             ?.unitName
-      //         }
-      //       </>
-      //     );
-      //   },
+      render: (item: IBranch) => {
+        return (
+          <>
+            {
+              unitData?.data?.find((unit: IUnit) => unit.id == item.orgUnitId)
+                ?.unitName
+            }
+          </>
+        );
+      },
     },
     {
       dataKey: "address",

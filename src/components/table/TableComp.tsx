@@ -19,6 +19,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { DataTableProps } from "./table";
 import { debounce } from "lodash";
 import Pagination from "./pagination";
+import { useLocale } from "../../contexts/LocaleContextProvider";
 
 const useStyles = makeStyles({
   root: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles({
 });
 
 const TableComp = <T extends object>(props: DataTableProps<T>) => {
+  const localize = useLocale();
   const styles = useStyles();
   const [cols, setCols] = useState<TableColumnDefinition<T>[]>([]);
   const [selectedItems, setSelectedItems] = useState<T[]>([]);
@@ -127,12 +129,12 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
   return (
     <div className={styles.root}>
       <div>
-        <Label className={styles.label}>Search</Label>
         <Input
           value={props.searchValue}
           onChange={({ target }) => {
             if (debouncedSearch) debouncedSearch(target.value);
           }}
+          placeholder={localize("search")}
         />
       </div>
       <div className={styles.tableWrapper}>

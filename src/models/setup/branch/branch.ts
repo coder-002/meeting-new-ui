@@ -1,6 +1,6 @@
 export interface IBranch {
   id: number;
-  orgUnitId: number;
+  P: number;
   branchName: string;
   branchCode: string;
   address: string;
