@@ -16,7 +16,7 @@ const Branch = () => {
   const [searchText, setSearchText] = useState<string>();
   const { mutateAsync: getBranchFilter } = useGetBranchfilter();
   const { data: unitData } = useGetAllUnits();
-
+console.log(unitData);
   async function getData() {
     const data = await getBranchFilter({
       pageNumber: pageNumber,

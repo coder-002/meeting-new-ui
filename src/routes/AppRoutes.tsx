@@ -7,9 +7,9 @@ import Designation from "../pages/setup/tabs/designation";
 import Distance from "../pages/setup/tabs/distance";
 import OrganizationPage from "../pages/setup/tabs/organization";
 import BusinessUnit from "../pages/setup/tabs/unit";
+import User from "../pages/setup/tabs/user/user";
 import { Navigation_Routes } from "./routes.constant";
 import { useRoutes } from "react-router-dom";
-
 const AppRoutes = () => {
   const routes = [
     {
@@ -37,6 +37,15 @@ const AppRoutes = () => {
       element: (
         <SetupPage>
           <Branch />
+        </SetupPage>
+      ),
+    },
+    
+    {
+      path: Navigation_Routes.user,
+      element: (
+        <SetupPage>
+          <User />
         </SetupPage>
       ),
     },

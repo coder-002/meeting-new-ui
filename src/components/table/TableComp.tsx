@@ -186,7 +186,7 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
         </Table>
       </div>
 
-      {paginatedData.length > 10 && (
+      {paginatedData.length > 1 && (
         <div>
           <Pagination
             currentPage={currentPage}

@@ -13,6 +13,9 @@ export const api = {
       post: "/org/unit",
       getUnitPagination: "/org/unit/filter",
     },
+    user: {
+      getUserPagination: "/user/filter",
+    },
     branch: {
       getAllBranches: "/org/branches",
       getBranchPagination: "/org/branch/filter",
