@@ -1,27 +1,24 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { IPagination } from "../../models/pagination/pagination";
+import { useQuery } from "react-query";
+
 import { api } from "../api-list";
 import instance from "../api-service";
-import { IBranch } from "../../models/setup/branch/branch";
+import { IOtherAllowance } from "../../models/setup/OtherAllowance/otherAllowance";
 
-
-
-const getOtherAllowencFilter = (props: IPagination) => {
-  return instance.post(
-    api.setup.otherallowancesetup.getOtherAllowancePagination,
-    props
+const getOtherAllowance = () => {
+  return instance.get<IOtherAllowance[]>(
+    api.setup.otherallowancesetup.getOtherAllowance
   );
 };
 
-const useGetOtherAllowancefilter = () => {
-  const queryClient = useQueryClient();
-  return useMutation(getOtherAllowencFilter, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(
-        api.setup.otherallowancesetup.getOtherAllowancePagination
-      );
-    },
-  });
+const useGetOtherAllowance = () => {
+  return useQuery(
+    api.setup.otherallowancesetup.getOtherAllowance,
+    getOtherAllowance,
+    {
+      onSuccess: (data) => data.data,
+      onError: (error) => console.error(error),
+    }
+  );
 };
 
-export { useGetOtherAllowancefilter};
+export { useGetOtherAllowance };
