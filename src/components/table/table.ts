@@ -21,4 +21,5 @@ export interface DataTableProps<T extends object> {
   setPageSize?: (x: number) => void;
   setCurrentPage?: (x: number) => void;
   pagination?: boolean;
+  onAddButtonClick?: () => void;
 }

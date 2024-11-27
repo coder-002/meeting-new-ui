@@ -1,4 +1,5 @@
 import {
+  Button,
   createTableColumn,
   Input,
   Label,
@@ -34,6 +35,10 @@ const useStyles = makeStyles({
   tableWrapper: {
     width: "100%",
     overflowX: "auto",
+  },
+  tableHead: {
+    display: "flex",
+    justifyContent: "space-between",
   },
 });
 
@@ -129,7 +134,7 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
 
   return (
     <div className={styles.root}>
-      <div>
+      <div className={styles.tableHead}>
         <Input
           value={props.searchValue}
           onChange={({ target }) => {
@@ -137,6 +142,8 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
           }}
           placeholder={localize("search")}
         />
+
+        <Button onClick={props.onAddButtonClick}>{localize("add")}</Button>
       </div>
       <div className={styles.tableWrapper}>
         <Table style={{ minWidth: "1000px" }}>
