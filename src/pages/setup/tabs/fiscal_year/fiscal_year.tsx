@@ -5,8 +5,8 @@ import { IFiscalyear } from "../../../../models/setup/fiscalyear/fiscalyear";
 import { useGetAllFiscalyear } from "../../../../services/setup/service-fiscal_year";
 const Fiscalyear = () => {
   const localize = useLocale();
-   const { data:fiscalYear } = useGetAllFiscalyear();
-console.log(fiscalYear);
+  const { data: fiscalYear } = useGetAllFiscalyear();
+  console.log(fiscalYear);
   const cols: DataTable<IFiscalyear>[] = [
     {
       dataKey: "name",
@@ -19,13 +19,15 @@ console.log(fiscalYear);
     {
       dataKey: "endsOn",
       label: localize("end_year"),
-    }]
+    },
+  ];
   return (
     <>
       <TableComp
         columns={cols}
-        data={fiscalYear?.data|| []}
+        data={fiscalYear?.data || []}
         selectionMode="single"
+        pagination={false}
       />
     </>
   );

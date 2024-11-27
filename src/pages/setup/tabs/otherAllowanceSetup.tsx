@@ -25,6 +25,7 @@ const OtherAllowanceSetup = () => {
         columns={cols}
         data={otherAllowance?.data || []}
         selectionMode="single"
+        pagination={false}
       />
     </div>
   );
