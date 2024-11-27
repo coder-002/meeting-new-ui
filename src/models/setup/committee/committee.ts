@@ -1,5 +1,6 @@
 export interface ICommittee {
   id: number;
+
   unitId: number;
   rank: number;
   branchId: number;

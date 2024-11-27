@@ -5,6 +5,7 @@ export interface ILocale {
   debit: string;
   credit: string;
   attended: string;
+  
   absent: string;
   no_documents_uploaded: string;
   meeting_type_name: string;

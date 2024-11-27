@@ -1,13 +1,8 @@
-export interface committee_type {
+export interface ICommitteetype {
   id: number;
-  unitId: number;
-  rank: number;
-  branchId: number;
-  typeId: number;
-  committeeCode: string;
-  committeeName: string;
+  typeName: string;
   description: string;
   isActive: boolean;
-  branchName: string;
-  unitName: string;
+
+  
 }

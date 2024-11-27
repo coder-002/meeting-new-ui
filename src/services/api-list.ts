@@ -32,6 +32,14 @@ export const api = {
     distance: {
       getDistancePagination: "/distance/filter",
     },
+    committeetype:{
+      getAllCommittee:"/org/committee",
+      getCommitteetypePagination: "/committeetype/filter"
+    },
+    otherallowancesetup:{
+      getAllCommittee:"/org/allowance",
+      getOtherAllowancePagination: "/allowance/normal"
+    },
     AllowanceType: {
       getAllowancePAgination: "/allowancetype/filter",
     },

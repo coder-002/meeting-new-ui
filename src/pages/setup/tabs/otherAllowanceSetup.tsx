@@ -1,23 +1,23 @@
-import { Badge } from "@fluentui/react-components";
+
 import TableComp from "../../../components/table/TableComp";
 import { useEffect, useState } from "react";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
 import { DataTable } from "../../../components/table/table";
 import { useGetAllUnits } from "../../../services/setup/service-unit";
-import { ICommitteetype } from "../../../models/setup/committee_type/committee_type";
-import { useGetCommittetypefilter } from "../../../services/setup/service-committeetype";
+import { IOtherAllowance } from "../../../models/setup/OtherAllowance/otherAllowance";
+import { useGetOtherAllowancefilter } from "../../../services/setup/service-otherAllowanceSetup";
 
-const Committeetype = () => {
+const OtherAllowanceSetup = () => {
   const localize = useLocale();
-  const [data, setData] = useState<ICommitteetype[]>([]);
+  const [data, setData] = useState<IOtherAllowance[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchText, setSearchText] = useState<string>();
-  const { mutateAsync: getCommitteetypeFilter } = useGetCommittetypefilter();
+  const { mutateAsync: getOtherAllowencFilter } = useGetOtherAllowancefilter();
   const { data: unitData } = useGetAllUnits();
   console.log(unitData);
   async function getData() {
-    const data = await getCommitteetypeFilter({
+    const data = await getOtherAllowencFilter({
       pageNumber: pageNumber,
       pageSize: pageSize,
       searchText: searchText,
@@ -31,30 +31,14 @@ const Committeetype = () => {
     getData();
   }, [pageNumber, pageSize, searchText]);
 
-  const cols: DataTable<ICommitteetype>[] = [
+  const cols: DataTable<IOtherAllowance>[] = [
     {
-      dataKey: "typeName",
-      label: localize("type_name"),
+      dataKey: "allowanceName",
+      label: localize("Allowance"),
     },
     {
-      dataKey: "description",
-      label: localize("description"),
-    },
-    {
-      dataKey: "isActive",
-      label: localize("status"),
-      render: (item: any) => {
-        return (
-          <Badge
-            appearance="filled"
-            style={{
-              backgroundColor: item.isActive ? "primary" : "red",
-            }}
-          >
-            {item.isActive ? "active" : "inactive"}
-          </Badge>
-        );
-      },
+      dataKey: "amount",
+      label: localize("amount"),
     },
   ];
 
@@ -75,4 +59,4 @@ const Committeetype = () => {
   );
 };
 
-export default Committeetype;
+export default OtherAllowanceSetup;
