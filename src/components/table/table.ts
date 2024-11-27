@@ -20,4 +20,5 @@ export interface DataTableProps<T extends object> {
   currentPage?: number;
   setPageSize?: (x: number) => void;
   setCurrentPage?: (x: number) => void;
+  pagination?: boolean;
 }

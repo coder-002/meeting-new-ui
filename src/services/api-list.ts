@@ -8,6 +8,15 @@ export const api = {
     organization: {
       get: "/org",
     },
+    fiscalyear: {
+      getFiscalyearPagination: "/fiscalyear/all",
+    },
+    telephone_allowance: {
+      getTelephoneallowancePagination: "/allowance/telephone-allowance",
+    },
+    meeting_type: {
+      getMeetingtypePagination: "/meetingtype/filter",
+    },
     unit: {
       get: "/org/units",
       post: "/org/unit",

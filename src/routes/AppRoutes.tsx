@@ -12,8 +12,11 @@ import OrganizationPage from "../pages/setup/tabs/organization";
 import OtherAllowanceSetup from "../pages/setup/tabs/otherAllowanceSetup";
 import BusinessUnit from "../pages/setup/tabs/unit";
 import User from "../pages/setup/tabs/user/user";
+import Meetingtype from "../pages/setup/tabs/meeting_type/meeting_type";
 import { Navigation_Routes } from "./routes.constant";
 import { useRoutes } from "react-router-dom";
+import Telephoneallowance from "../pages/setup/tabs/telephone_allowance/telephone_allowance";
+import Fiscalyear from "../pages/setup/tabs/fiscal_year/fiscal_year";
 const AppRoutes = () => {
   const routes = [
     {
@@ -25,6 +28,14 @@ const AppRoutes = () => {
       element: (
         <SetupPage>
           <OrganizationPage />
+        </SetupPage>
+      ),
+    },
+    {
+      path: Navigation_Routes.fiscal_year,
+      element: (
+        <SetupPage>
+          <Fiscalyear />
         </SetupPage>
       ),
     },
@@ -44,7 +55,14 @@ const AppRoutes = () => {
         </SetupPage>
       ),
     },
-
+    {
+      path: Navigation_Routes.meeting_type,
+      element: (
+        <SetupPage>
+          <Meetingtype />
+        </SetupPage>
+      ),
+    },
     {
       path: Navigation_Routes.user,
       element: (
@@ -53,6 +71,23 @@ const AppRoutes = () => {
         </SetupPage>
       ),
     },
+    {
+      path: Navigation_Routes.telephone_allowance,
+      element: (
+        <SetupPage>
+          <Telephoneallowance />
+        </SetupPage>
+      ),
+    },
+    {
+      path: Navigation_Routes.fiscal_year,
+      element: (
+        <SetupPage>
+          <Branch />
+        </SetupPage>
+      ),
+    },
+
     {
       path: Navigation_Routes.committee,
       element: (

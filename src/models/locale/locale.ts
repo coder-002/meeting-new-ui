@@ -330,6 +330,8 @@ export interface ILocale {
   update_allowance_type: string;
   update_fiscal_year: string;
   document_name: string;
+  typename:string,
+  member_id:number;
   allowance_typename: string;
   is_allowance_applicable: string;
   allowance_before_deduction: string;

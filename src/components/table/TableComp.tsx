@@ -45,6 +45,7 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
 
   const currentPage = props.currentPage ?? 1;
   const pageSize = props.pageSize ?? 10;
+  const pagination = props.pagination ?? true;
   const debouncedSearch =
     props.setSearchValue !== undefined
       ? debounce((value: string) => props.setSearchValue!(value), 1000)
@@ -186,7 +187,7 @@ const TableComp = <T extends object>(props: DataTableProps<T>) => {
         </Table>
       </div>
 
-      {paginatedData.length > 1 && (
+      {paginatedData.length > 1 && pagination && (
         <div>
           <Pagination
             currentPage={currentPage}
