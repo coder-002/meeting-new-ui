@@ -1,10 +1,12 @@
 import Dashboard from "../pages/dashboard/Dashboard";
 import SetupPage from "../pages/setup/page";
+import AllowanceType from "../pages/setup/tabs/allowanceType";
 import Branch from "../pages/setup/tabs/branch";
 import Committee from "../pages/setup/tabs/committee/committee";
 import Deduction from "../pages/setup/tabs/deduction";
 import Designation from "../pages/setup/tabs/designation";
 import Distance from "../pages/setup/tabs/distance";
+import DocumentType from "../pages/setup/tabs/documentType";
 import OrganizationPage from "../pages/setup/tabs/organization";
 import BusinessUnit from "../pages/setup/tabs/unit";
 import User from "../pages/setup/tabs/user/user";
@@ -40,7 +42,7 @@ const AppRoutes = () => {
         </SetupPage>
       ),
     },
-    
+
     {
       path: Navigation_Routes.user,
       element: (
@@ -78,6 +80,22 @@ const AppRoutes = () => {
       element: (
         <SetupPage>
           <Distance />
+        </SetupPage>
+      ),
+    },
+    {
+      path: Navigation_Routes.allowance_type,
+      element: (
+        <SetupPage>
+          <AllowanceType />
+        </SetupPage>
+      ),
+    },
+    {
+      path: Navigation_Routes.document_type,
+      element: (
+        <SetupPage>
+          <DocumentType />
         </SetupPage>
       ),
     },

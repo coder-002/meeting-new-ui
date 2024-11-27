@@ -32,5 +32,11 @@ export const api = {
     distance: {
       getDistancePagination: "/distance/filter",
     },
+    AllowanceType: {
+      getAllowancePAgination: "/allowancetype/filter",
+    },
+    documentType: {
+      getDocumentPagination: "/documenttype/filter",
+    },
   },
 };

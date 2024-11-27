@@ -308,12 +308,17 @@ export interface ILocale {
   edit_meeting_type: string;
   edit_meeting: string;
   type_name: string;
+  compulsory: string;
+  not_compulsory: string;
   committee_type: string;
   entity_state: string;
   meeting_list: string;
+  document_type_name: string;
+  number: string;
   total_allowance: string;
   total_deduction: string;
   set_the_status_of_committee_type: string;
+  is_deduction_compulsory: string;
   all: string;
   update_document_type: string;
   overview: string;
