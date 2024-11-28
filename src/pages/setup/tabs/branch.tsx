@@ -1,11 +1,4 @@
-import {
-  Badge,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerHeaderTitle,
-} from "@fluentui/react-components";
+import { Badge } from "@fluentui/react-components";
 import TableComp from "../../../components/table/TableComp";
 import { useEffect, useState } from "react";
 import { IBranch } from "../../../models/setup/branch/branch";
@@ -14,7 +7,7 @@ import { useLocale } from "../../../contexts/LocaleContextProvider";
 import { DataTable } from "../../../components/table/table";
 import { useGetAllUnits } from "../../../services/setup/service-unit";
 import { IUnit } from "../../../models/setup/unit/unit";
-import { Dismiss24Regular } from "@fluentui/react-icons";
+import Drawer from "../../../components/drawer/Drawer";
 
 const Branch = () => {
   const localize = useLocale();
@@ -105,25 +98,8 @@ const Branch = () => {
         onAddButtonClick={() => setOpen(true)}
       />
 
-      <Drawer open={open} onOpenChange={(_, { open }) => setOpen(open)}>
-        <DrawerHeader>
-          <DrawerHeaderTitle
-            action={
-              <Button
-                appearance="subtle"
-                aria-label="Close"
-                icon={<Dismiss24Regular />}
-                onClick={() => setOpen(false)}
-              />
-            }
-          >
-            Default Drawer
-          </DrawerHeaderTitle>
-        </DrawerHeader>
-
-        <DrawerBody>
-          <p>Drawer content</p>
-        </DrawerBody>
+      <Drawer title={localize("add_branch")} isOpen={open} setIsOpen={setOpen}>
+        <form></form>
       </Drawer>
     </div>
   );
