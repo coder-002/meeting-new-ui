@@ -50,6 +50,7 @@ const Input = <T extends FieldValues>({
     field,
     fieldState: { error },
   } = useController({ name, control });
+
   return (
     <Field
       required={required}

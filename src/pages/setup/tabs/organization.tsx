@@ -8,7 +8,6 @@ import { useGetOrganization } from "../../../services/setup/service-organization
 const OrganizationPage = () => {
   const localize = useLocale();
   const { data } = useGetOrganization();
-
   const columns: DataTable<IOrganization>[] = [
     { dataKey: "fullName", label: localize("full_name") },
     { dataKey: "nickName", label: localize("nick_name") },

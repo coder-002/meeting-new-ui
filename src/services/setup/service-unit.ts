@@ -4,6 +4,17 @@ import { api } from "../api-list";
 import instance from "../api-service";
 import { IUnit } from "../../models/setup/unit/unit";
 
+const postAllUnits=(unitData:IUnit)=>{
+  return instance.post(api.setup.unit.post,(unitData));
+}
+const usePostAllUnits=()=>{
+  const queryClient=useQueryClient();
+  return useMutation(postAllUnits,{
+    onSuccess:()=>{
+      queryClient.invalidateQueries(api.setup.unit.post);
+    }
+  })
+}
 const getAllUnits = () => {
   return instance.get<IUnit[]>(api.setup.unit.get);
 };
@@ -11,6 +22,7 @@ const getAllUnits = () => {
 const useGetAllUnits = () => {
   return useQuery(api.setup.unit.get, getAllUnits, {
     onSuccess: (data) => data.data,
+    refetchOnWindowFocus: false,
   });
 };
 
@@ -27,4 +39,4 @@ const useGetUnitFilter = () => {
   });
 };
 
-export { useGetUnitFilter, useGetAllUnits };
+export { useGetUnitFilter, useGetAllUnits, usePostAllUnits };

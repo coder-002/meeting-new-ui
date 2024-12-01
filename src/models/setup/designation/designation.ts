@@ -5,3 +5,4 @@ export interface IDesignation {
   isActive: boolean;
   rank: number;
 }
+export type IPostDesignation = Omit<IDesignation, "id">;

@@ -3,14 +3,31 @@ import { DataTable } from "../../../../components/table/table";
 import { useLocale } from "../../../../contexts/LocaleContextProvider";
 import TableComp from "../../../../components/table/TableComp";
 import { IMeetingType } from "../../../../models/setup/meetingtype/meetingtype";
-import { useGetMeetingtypefilter } from "../../../../services/setup/service-meeting_type";
-import { Badge } from "@fluentui/react-components";
+import { useGetMeetingtypefilter, usePostAllMeetingtype } from "../../../../services/setup/service-meeting_type";
+import { Badge, Button } from "@fluentui/react-components";
+import Drawer from "../../../../components/drawer/Drawer";
+import Input from "../../../../components/form/Input";
+import Textarea from "../../../../components/form/TextArea";
+import Checkbox from "../../../../components/form/Checkbox";
+import { useForm } from "react-hook-form";
+const initialValues:IMeetingType={
+  id: 0,
+  typeName:"",
+  description: "",
+  allowanceApplicable: true,
+}
+
 const Meetingtype = () => {
   const localize = useLocale();
+  const{control,handleSubmit,reset}=useForm({
+    defaultValues:initialValues,
+  })
+  const[open,setOpen]=useState(false);
   const [data, setData] = useState<IMeetingType[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchText, setSearchText] = useState<string>();
+  const{mutateAsync: postMeetingtype}=usePostAllMeetingtype();
   const { mutateAsync: getMeeting_typefilter} = useGetMeetingtypefilter();
   async function getData() {
     const data = await getMeeting_typefilter({
@@ -51,6 +68,20 @@ const Meetingtype = () => {
       },
     },
   ];
+    const onSubmitHandler = async (data: IMeetingType) => {
+    const response = await postMeetingtype(data);
+
+    if (response.status == 200) {
+      alert("success");
+      setOpen(false);
+      reset(initialValues);
+    }
+  };
+  const handleCancel=()=>
+  {
+     setOpen(false);
+      reset(initialValues);
+  }
   return (
     <>
       <TableComp
@@ -63,7 +94,37 @@ const Meetingtype = () => {
         setCurrentPage={setPageNumber}
         setPageSize={setPageSize}
         setSearchValue={setSearchText}
+        onAddButtonClick={()=>setOpen(true)}
       />
+      <Drawer
+        title={localize("add_meeting_type")}
+        isOpen={open}
+        setIsOpen={setOpen}
+      >
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
+          <div>
+            <Input
+              name="typeName"
+              control={control}
+              label={localize("type_name")}
+              required
+            />
+            <Textarea
+              name="description"
+              control={control}
+              label={localize("description")}
+            />
+            <Checkbox
+              name="allowanceApplicable"
+              control={control}
+              label={localize("is_allowance_applicable")}
+            />
+
+           <Button type="submit">{localize("add")}</Button>
+          <Button onClick={handleCancel}>{localize("cancel")}</Button>
+            </div>
+        </form>
+      </Drawer>
     </>
   );
 };

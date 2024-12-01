@@ -2,17 +2,36 @@ import { useState, useEffect } from "react";
 import TableComp from "../../../components/table/TableComp";
 import { DataTable } from "../../../components/table/table";
 import { IDocumentType } from "../../../models/setup/document_type/document_type";
-import { useGetDocumentTypeFilter } from "../../../services/setup/service-documenttype";
+import {
+  useGetDocumentTypeFilter,
+  usePostDocumentType,
+} from "../../../services/setup/service-documenttype";
 import { useLocale } from "../../../contexts/LocaleContextProvider";
-import { Badge } from "@fluentui/react-components";
-
+import {
+  Badge,
+  Button
+} from "@fluentui/react-components";
+import Input from "../../../components/form/Input";
+import { useForm } from "react-hook-form";
+import Checkbox from "../../../components/form/Checkbox";
+import Drawer from "../../../components/drawer/Drawer";
+const initialValues: IDocumentType = {
+  id: 0,
+  typeName: "",
+  isCompulsory: true,
+};
 const DocumentType = () => {
   const localize = useLocale();
+  const [open, setOpen] = useState(false);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchText, setSearchText] = useState<string>("");
   const [data, setData] = useState<IDocumentType[]>([]);
   const { mutateAsync: getDocumenttypeFilter } = useGetDocumentTypeFilter();
+  const { mutateAsync: getPostDocumentType } = usePostDocumentType();
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: initialValues,
+  });
   const getData = async () => {
     try {
       const data = await getDocumenttypeFilter({
@@ -30,13 +49,12 @@ const DocumentType = () => {
 
   useEffect(() => {
     getData();
-  }, [pageNumber, pageSize, searchText, getDocumenttypeFilter]);
-
+  }, [pageNumber, pageSize, searchText]);
+   const handleCancel = () => {
+     setOpen(false);
+     reset(initialValues);
+   };
   const columns: DataTable<IDocumentType>[] = [
-    {
-      dataKey: "id",
-      label: localize("number"),
-    },
     {
       dataKey: "typeName",
       label: localize("document_type_name"),
@@ -55,18 +73,52 @@ const DocumentType = () => {
       },
     },
   ];
+  const submitDocumenttype = async (data: IDocumentType) => {
+    const requestBody = {
+      ...data,
+    };
+    const response = await getPostDocumentType(requestBody);
+    if (response.status === 200) {
+      setOpen(false);
+      reset(initialValues);
+    }
+  };
   return (
-    <TableComp
-      columns={columns}
-      data={data}
-      selectionMode="single"
-      searchValue={searchText}
-      currentPage={pageNumber}
-      setCurrentPage={setPageNumber}
-      pageSize={pageSize}
-      setPageSize={setPageSize}
-      setSearchValue={setSearchText}
-    />
+    <>
+      <TableComp
+        columns={columns}
+        data={data}
+        selectionMode="single"
+        searchValue={searchText}
+        currentPage={pageNumber}
+        setCurrentPage={setPageNumber}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        setSearchValue={setSearchText}
+        onAddButtonClick={() => setOpen(true)}
+      />
+      <Drawer
+        title={localize("add_document_type")}
+        isOpen={open}
+        setIsOpen={setOpen}
+      >
+        <form onSubmit={handleSubmit(submitDocumenttype)}>
+          <Input
+            control={control}
+            name={"typeName"}
+            label={localize("document_type_name")}
+            placeholder="Document Type"
+          />
+          <Checkbox
+            control={control}
+            name="isCompulsory"
+            label="is_compulsory"
+          />
+          <Button type="submit">{localize("add")}</Button>
+          <Button onClick={handleCancel}>{localize("cancel")}</Button>
+        </form>
+      </Drawer>
+    </>
   );
 };
 export default DocumentType;

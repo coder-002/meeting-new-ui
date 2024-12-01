@@ -1,7 +1,10 @@
-import { Badge } from "@fluentui/react-components";
+import { Badge, Button } from "@fluentui/react-components";
 import TableComp from "../../../../components/table/TableComp";
 import { useEffect, useState } from "react";
-import { useGetCommitteeFilter } from "../../../../services/setup/committee/service-committee";
+import {
+  useGetCommitteeFilter,
+  usePostAllCommittee,
+} from "../../../../services/setup/committee/service-committee";
 import { ICommittee } from "../../../../models/setup/committee/committee";
 import { useLocale } from "../../../../contexts/LocaleContextProvider";
 import { DataTable } from "../../../../components/table/table";
@@ -9,16 +12,43 @@ import { useGetAllBranches } from "../../../../services/setup/service-branch";
 import { useGetAllUnits } from "../../../../services/setup/service-unit";
 import { IUnit } from "../../../../models/setup/unit/unit";
 import { IBranch } from "../../../../models/setup/branch/branch";
+import Drawer from "../../../../components/drawer/Drawer";
+import Input from "../../../../components/form/Input";
+import Select from "../../../../components/form/Select";
+import Textarea from "../../../../components/form/TextArea";
+import { useNavigate} from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { ICommitteetype } from "../../../../models/setup/committee_type/committee_type";
+import { useGetCommitteeType } from "../../../../services/setup/service-committeetype";
 
+const initialValues: ICommittee = {
+  id: 0,
+  unitId: 0,
+  rank: 0,
+  branchId: 0,
+  typeId: 0,
+  committeeCode:"",
+  committeeName:"",
+  description: "",
+  isActive: true,
+  branchName:"",
+  unitName:"",
+};
 const Committee = () => {
   const localize = useLocale();
   const [data, setData] = useState<ICommittee[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchText, setSearchText] = useState<string>();
+  const [open,setOpen]=useState<boolean>(false);
+  const {mutateAsync: postAllCommittee } = usePostAllCommittee();
   const { mutateAsync: getBranchFilter } = useGetCommitteeFilter();
   const { data: branchData } = useGetAllBranches();
   const { data: unitData } = useGetAllUnits();
+   const { data: committeeType } = useGetCommitteeType();
+  const { control, handleSubmit, reset } = useForm<typeof initialValues>({
+    defaultValues: initialValues,
+  });
 
   async function getData() {
     const data = await getBranchFilter({
@@ -34,7 +64,27 @@ const Committee = () => {
   useEffect(() => {
     getData();
   }, [pageNumber, pageSize, searchText]);
+  const submitHandler = async (data: ICommittee) => {
+    const response = await postAllCommittee(data);
 
+    if (response.status == 200) {
+      alert("success");
+      setOpen(false);
+      reset(initialValues);
+    }
+  };
+  const handleCancel = () => {
+    setOpen(false);
+    reset(initialValues);
+  };
+ const navigate = useNavigate();
+
+ const selectCommitteeType =
+   committeeType &&
+   committeeType.map((item: ICommitteetype) => {
+     return { id: item.id, name: item.typeName };
+   });
+ 
   const cols: DataTable<ICommittee>[] = [
     { dataKey: "rank", label: localize("rank") },
     {
@@ -109,7 +159,67 @@ const Committee = () => {
         setPageSize={setPageSize}
         setSearchValue={setSearchText}
         selectionMode="single"
+        onAddButtonClick={() => setOpen(true)}
       />
+      <Drawer
+        title={localize("add_committee")}
+        isOpen={open}
+        setIsOpen={setOpen}
+      >
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <Input
+            name="rank"
+            control={control}
+            label={localize("rank")}
+            placeholder="enter the rank"
+            
+          />
+          <Select
+            name="unitId"
+            control={control}
+            label={localize("unit_name")}
+            options={[]}
+            placeholder={localize("unit_name")}
+            
+          />
+          <Select
+            name="branchId"
+            control={control}
+            label={localize("branch_name")}
+            options={[]}
+            placeholder={localize("branch_name")}
+            
+          />
+
+          <Input
+            name="committeeCode"
+            control={control}
+            label={localize("committee_code")}
+            
+          />
+          <Input
+            name="committeeName"
+            control={control}
+            label={localize("committee_name")}
+          
+          />
+          <Select
+            name="typeId"
+            control={control}
+            label={localize("committee_type")}
+            options={[]}
+            placeholder={localize("committee_type")}
+          
+          />
+          <Textarea
+            name="description"
+            control={control}
+            label={localize("description")}
+          />
+          <Button type="submit">{localize("add")}</Button>
+          <Button onClick={handleCancel}>{localize("cancel")}</Button>
+        </form>
+      </Drawer>
     </div>
   );
 };

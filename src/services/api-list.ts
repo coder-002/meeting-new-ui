@@ -15,6 +15,7 @@ export const api = {
       getTelephoneallowancePagination: "/allowance/telephone-allowance",
     },
     meeting_type: {
+      postAllMeetingtype:"/meetingtype",
       getMeetingtypePagination: "/meetingtype/filter",
     },
     unit: {
@@ -23,35 +24,46 @@ export const api = {
       getUnitPagination: "/org/unit/filter",
     },
     user: {
+      postUser: "/user",
       getUserPagination: "/user/filter",
     },
     branch: {
+      postBranch: "/org/branch",
       getAllBranches: "/org/branches",
       getBranchPagination: "/org/branch/filter",
     },
     committee: {
+      postAllCommittee: "/committee",
       getCommitteePagination: "/committee/filter",
     },
     designation: {
+      postAllDesignation:"/designation",
       getDesignationPagination: "/designation/filter",
     },
     deduction: {
       getDeductionPagination: "/deduct/filter",
+      postDeduction: "/deduct",
     },
     distance: {
       getDistancePagination: "/distance/filter",
     },
     committeetype: {
+      postCommitteetype:"/committeetype",
+      get: "/committeetype/all",
       getAllCommittee: "/org/committee",
       getCommitteetypePagination: "/committeetype/filter",
     },
     otherallowancesetup: {
+      postOtherAllowance: "/allowance",
       getOtherAllowance: "/allowance/normal",
     },
     AllowanceType: {
-      getAllowancePAgination: "/allowancetype/filter",
+      getAllowanceTypePagination: "/allowancetype/filter",
+      getAllAllowanceType: "/allowancetype/all",
+      postAllAllowanceType:"/allowancetype"
     },
     documentType: {
+      postDocument: "/documenttype",
       getDocumentPagination: "/documenttype/filter",
     },
   },

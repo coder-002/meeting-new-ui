@@ -5,7 +5,7 @@ export interface ILocale {
   debit: string;
   credit: string;
   attended: string;
-  
+
   absent: string;
   no_documents_uploaded: string;
   meeting_type_name: string;
@@ -91,6 +91,7 @@ export interface ILocale {
   active: string;
   inactive: string;
   status: string;
+  add_telephoneallowance: string;
   add_committee: string;
   view: string;
   allowance_type_name: string;
@@ -298,6 +299,7 @@ export interface ILocale {
   about_to_delete_deduction_are_you_sure: string;
   about_to_delete_fiscal_year_are_you_sure: string;
   is_transportation_allowance: string;
+  transportation_allowance: string;
   is_telephone_allowance: string;
   yes_delete: string;
   user: string;
@@ -314,6 +316,7 @@ export interface ILocale {
   committee_type: string;
   entity_state: string;
   meeting_list: string;
+  select_units: string;
   document_type_name: string;
   number: string;
   total_allowance: string;
@@ -330,8 +333,8 @@ export interface ILocale {
   update_allowance_type: string;
   update_fiscal_year: string;
   document_name: string;
-  typename:string,
-  member_id:number;
+  typename: string;
+  member_id: number;
   allowance_typename: string;
   is_allowance_applicable: string;
   allowance_before_deduction: string;
@@ -343,6 +346,8 @@ export interface ILocale {
   submit: string;
   no_meetings_for_the_day: string;
   start_year: string;
+  meeting_allowance: string;
+
   end_year: string;
   meeting_place: string;
   from_date: string;
@@ -397,6 +402,7 @@ export interface ILocale {
   update_success: string;
   update_fail: string;
   allowance_type: string;
+  add_otherallowancesetup: string;
   add_allowance_type: string;
   document_type: string;
   add_document_type: string;
@@ -405,6 +411,7 @@ export interface ILocale {
   meeting_participants_added: string;
   meeting_participants_addition_fail: string;
   added: string;
+  health_allowance: string;
   modified: string;
   deleted: string;
   meeting_call_approved: string;

@@ -5,9 +5,7 @@ import { ITelephoneAllowance } from "../../../../models/setup/telephoneallowance
 import { useGetTelephoneAllowance } from "../../../../services/setup/service-telephone_allowance";
 const Telephoneallowance = () => {
   const localize = useLocale();
-
   const { data: telephoneAllowance } = useGetTelephoneAllowance();
-
   const cols: DataTable<ITelephoneAllowance>[] = [
     {
       dataKey: "memberId",
@@ -15,7 +13,7 @@ const Telephoneallowance = () => {
     },
     {
       dataKey: "amount",
-      label: localize("description"),
+      label: localize("Amount"),
     },
     {
       dataKey: "allowanceName",
@@ -30,6 +28,27 @@ const Telephoneallowance = () => {
         selectionMode="single"
         pagination={false}
       />
+      {/* <Drawer
+        title={localize("add_telephoneallowance")}
+        isOpen={open}
+        setIsOpen={setOpen}
+      >
+        <form>
+          <Input
+            name="memberId"
+            label={localize("member_id")}
+            control={control}
+          />
+          <Input name="amount" label={localize("Amount")} control={control} />
+          <Input
+            name="allowanceName"
+            label={localize("allowance_name")}
+            control={control}
+          />
+          <Button type="submit">{localize("add")}</Button>
+          <Button onClick={handleClick} >{localize("cancel")}</Button>
+        </form>
+      </Drawer> */}
     </>
   );
 };

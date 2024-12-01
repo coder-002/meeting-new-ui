@@ -1,5 +1,5 @@
 export interface IAllowanceType {
-  id: number;
+  id?: number;
   typeName: string;
   description: string;
   isTransportation: boolean;
