@@ -3,6 +3,4 @@ export interface ICommitteetype {
   typeName: string;
   description: string;
   isActive: boolean;
-
-  
 }

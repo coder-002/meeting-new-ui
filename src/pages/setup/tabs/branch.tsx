@@ -177,7 +177,6 @@ const Branch = () => {
             name="isActive"
             control={control}
             label={localize("status")}
-            required
           ></Checkbox>
           <Button type="submit">{localize("add")}</Button>
           <Button onClick={handleCancel}>{localize("cancel")}</Button>

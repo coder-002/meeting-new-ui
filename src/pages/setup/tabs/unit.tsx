@@ -120,7 +120,6 @@ const BusinessUnit = () => {
             label={localize("address")}
             required
           ></Input>
-
           <Button type="submit">{localize("add")}</Button>
           <Button onClick={handleCancel}>{localize("cancel")}</Button>
         </form>

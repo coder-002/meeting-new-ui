@@ -49,7 +49,6 @@ const Committee = () => {
   const { control, handleSubmit, reset } = useForm<typeof initialValues>({
     defaultValues: initialValues,
   });
-
   async function getData() {
     const data = await getBranchFilter({
       pageNumber: pageNumber,
@@ -78,10 +77,17 @@ const Committee = () => {
     reset(initialValues);
   };
  const selectCommitteeType =
-   committeeType &&
-   committeeType.map((item: ICommitteetype) => {
-     return { id: item.id, name: item.typeName };
-   });
+   committeeType?.map((item: ICommitteetype) => {
+     return { value: item.id, label: item.typeName};
+   })||[];
+   const selectBranch=
+   branchData?.data?.map((item: IBranch) => {
+     return { value: item.id, label: item.branchName };
+   })||[];
+  const selectUnit =
+    unitData?.data.map((item: IUnit) => {
+      return { value: item.id, label: item.unitName };
+    }) || [];
  
   const cols: DataTable<ICommittee>[] = [
     { dataKey: "rank", label: localize("rank") },
@@ -157,7 +163,7 @@ const Committee = () => {
         setPageSize={setPageSize}
         setSearchValue={setSearchText}
         selectionMode="single"
-        onAddButtonClick={() => setOpen(true)}
+        onAddButtonClick={() =>setOpen(true)}
       />
       <Drawer
         title={localize("add_committee")}
@@ -176,7 +182,7 @@ const Committee = () => {
             name="unitId"
             control={control}
             label={localize("unit_name")}
-            options={[]}
+            options={selectUnit}
             placeholder={localize("unit_name")}
             
           />
@@ -184,7 +190,7 @@ const Committee = () => {
             name="branchId"
             control={control}
             label={localize("branch_name")}
-            options={[]}
+            options={selectBranch}
             placeholder={localize("branch_name")}
           />
           <Input
@@ -203,7 +209,7 @@ const Committee = () => {
             name="typeId"
             control={control}
             label={localize("committee_type")}
-            options={[]}
+            options={selectCommitteeType}
             placeholder={localize("committee_type")}
           
           />
