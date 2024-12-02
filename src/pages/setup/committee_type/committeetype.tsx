@@ -11,6 +11,7 @@ import Input from "../../../components/form/Input";
 import Textarea from "../../../components/form/TextArea";
 import Checkbox from "../../../components/form/Checkbox";
 import { useForm } from "react-hook-form";
+import { useGetAllBranches } from "../../../services/setup/service-branch";
 const initialValues = {
   id:0,
   description: "",
@@ -35,11 +36,11 @@ const Committeetype = () => {
     const response = await postCommitteetype(data);
 
     if (response.status == 200) {
-      alert("success");
       setOpen(false);
       reset(initialValues);
     }
   };
+  
   const handleCancel = () => {
     setOpen(false);
     reset(initialValues);

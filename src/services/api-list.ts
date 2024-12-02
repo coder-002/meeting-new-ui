@@ -45,6 +45,7 @@ export const api = {
       postDeduction: "/deduct",
     },
     distance: {
+      postAllDistance:"/distance",
       getDistancePagination: "/distance/filter",
     },
     committeetype: {

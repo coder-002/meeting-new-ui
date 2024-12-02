@@ -77,8 +77,6 @@ const Committee = () => {
     setOpen(false);
     reset(initialValues);
   };
- const navigate = useNavigate();
-
  const selectCommitteeType =
    committeeType &&
    committeeType.map((item: ICommitteetype) => {
@@ -188,9 +186,7 @@ const Committee = () => {
             label={localize("branch_name")}
             options={[]}
             placeholder={localize("branch_name")}
-            
           />
-
           <Input
             name="committeeCode"
             control={control}

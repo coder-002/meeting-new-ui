@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueries, useQueryClient } from "react-query";
+import { useMutation, useQuery,useQueryClient } from "react-query";
 import { IPagination } from "../../models/pagination/pagination";
 import { api } from "../api-list";
 import instance from "../api-service";
@@ -51,6 +51,6 @@ const useGetCommittetypefilter = () => {
 };
 export {
   useGetCommittetypefilter,
-  getCommitteetypeFilter,
+  useGetCommitteeType,
   usePostCommitteeType,
 };

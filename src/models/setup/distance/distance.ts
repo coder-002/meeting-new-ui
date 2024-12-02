@@ -1,8 +1,8 @@
 export interface IDistance {
-  id: number;
-  fromBranch: number;
+  id?: number;
+  fromBranch?: number;
   fromBranchName: string;
-  toBranch: number;
+  toBranch?: number;
   toBranchName: string;
   kiloMeter: number;
   description: string;

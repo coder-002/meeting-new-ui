@@ -74,6 +74,10 @@ const Deduction = () => {
       reset(initialValues);
     }
   };
+   const handleCancel = () => {
+     setOpen(false);
+     reset(initialValues);
+   };
 
   return (
     <div>
@@ -89,32 +93,29 @@ const Deduction = () => {
         setSearchValue={setSearchText}
         onAddButtonClick={() => setOpen(true)}
       />
-      <Drawer  title={localize("deduction")}isOpen={open} setIsOpen={setOpen}>
-          <form onSubmit={handleSubmit(submitDeduction)}>
-            <Input
-              control={control}
-              name={"deductTitle"}
-              label={localize("deduction_title")}
-            />
-            <Textarea
-              control={control}
-              name={"description"}
-              label={localize("description")}
-            />
-            <Input
-              control={control}
-              name={"amount"}
-              label={localize("amount")}
-            />
-            <Input control={control} name={"rate"} label={localize("rate")} />
-            <Checkbox
-              control={control}
-              name="isCompulsory"
-              label="Is Deduction Compulsory"
-            />
+      <Drawer title={localize("deduction")} isOpen={open} setIsOpen={setOpen}>
+        <form onSubmit={handleSubmit(submitDeduction)}>
+          <Input
+            control={control}
+            name={"deductTitle"}
+            label={localize("deduction_title")}
+          />
+          <Textarea
+            control={control}
+            name={"description"}
+            label={localize("description")}
+          />
+          <Input control={control} name={"amount"} label={localize("amount")} />
+          <Input control={control} name={"rate"} label={localize("rate")} />
+          <Checkbox
+            control={control}
+            name="isCompulsory"
+            label="Is Deduction Compulsory"
+          />
 
-            <Button type="submit">{localize("add")}</Button>
-          </form>
+          <Button type="submit">{localize("add")}</Button>
+          <Button onClick={handleCancel}>{localize("cancel")}</Button>
+        </form>
       </Drawer>
     </div>
   );

@@ -23,6 +23,7 @@ const getAllBranches = () => {
 const useGetAllBranches = () => {
   return useQuery(api.setup.branch.getAllBranches, getAllBranches, {
     onSuccess: (data) => data.data,
+    refetchOnWindowFocus:false,
   });
 };
 

@@ -7,7 +7,6 @@ import { useLocale } from "../../../contexts/LocaleContextProvider";
 import { DataTable } from "../../../components/table/table";
 import Drawer from "../../../components/drawer/Drawer";
 import Input from "../../../components/form/Input";
-import Checkbox from "../../../components/form/Checkbox";
 import { useForm } from "react-hook-form";
 
 const BusinessUnit = () => {
@@ -114,19 +113,14 @@ const BusinessUnit = () => {
             control={control}
             label={localize("registration_date")}
             required
-          ></Input>
+          />
           <Input
             name="address"
             control={control}
             label={localize("address")}
             required
           ></Input>
-          <Checkbox
-            name="isActive"
-            control={control}
-            label={localize("active")}
-            required
-          ></Checkbox>
+
           <Button type="submit">{localize("add")}</Button>
           <Button onClick={handleCancel}>{localize("cancel")}</Button>
         </form>
