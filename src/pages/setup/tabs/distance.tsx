@@ -46,7 +46,7 @@ const Distance = () => {
    };
 const selectBranch =
   branchData?.data?.map((item: IBranch) => {
-    return { value: item.id, label: item.branchName }; // Use the expected structure
+    return { value: item.id, label: item.branchName }; 
   }) || [];
 
 
