@@ -1,8 +1,19 @@
-import { useQuery } from "react-query";
+import { QueryClient, useMutation, useQuery } from "react-query";
 import { api } from "../api-list";
 import instance from "../api-service";
 import { IFiscalyear } from "../../models/setup/fiscalyear/fiscalyear";
 
+const postAllFiscalyear=(fiscalyearData:IFiscalyear)=>{
+  return instance.post(api.setup.fiscalyear.postAllFiscalyear,fiscalyearData);
+}
+const usePostAllFiscalyear=()=>{
+  const queryClient=new QueryClient();
+  return useMutation(postAllFiscalyear,{
+    onSuccess:()=>{
+      queryClient.invalidateQueries(api.setup.fiscalyear.postAllFiscalyear);
+    }
+  })
+}
 const getAllFiscalyear = () => {
   return instance.get<IFiscalyear[]>(api.setup.fiscalyear.getFiscalyearPagination);
 };
@@ -17,4 +28,4 @@ const useGetAllFiscalyear = () => {
   );
 };
 
-export { useGetAllFiscalyear };
+export { useGetAllFiscalyear, usePostAllFiscalyear};

@@ -8,26 +8,27 @@ import { DataTable } from "../../../components/table/table";
 import Drawer from "../../../components/drawer/Drawer";
 import Input from "../../../components/form/Input";
 import { useForm } from "react-hook-form";
+import { DatePicker, DatePickerProps } from "@fluentui/react-datepicker-compat";
 
-const BusinessUnit = () => {
+const BusinessUnit = (props: Partial<DatePickerProps>) => {
   const localize = useLocale();
-  const{mutateAsync:postAllUnits}=usePostAllUnits();
+  const { mutateAsync: postAllUnits } = usePostAllUnits();
   const { mutateAsync: getBusinessUnit } = useGetUnitFilter();
   const [data, setData] = useState<IUnit[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [searchText, setSearchText] = useState<string>();
-  const[open,setOpen]=useState(false);
-  const initialValues:IUnit={
+  const [open, setOpen] = useState(false);
+  const initialValues: IUnit = {
     id: 0,
-  unitName: "",
-  registrationDate:"",
-  address: "",
-  isActive: true,
-  }
-  const{control,handleSubmit,reset}=useForm<typeof initialValues>({
-    defaultValues:initialValues,
-  })
+    unitName: "",
+    registrationDate: "",
+    address: "",
+    isActive: true,
+  };
+  const { control, handleSubmit, reset } = useForm<typeof initialValues>({
+    defaultValues: initialValues,
+  });
   async function getData() {
     const data = await getBusinessUnit({
       pageNumber: pageNumber,
@@ -108,12 +109,17 @@ const BusinessUnit = () => {
             label={localize("unit_name")}
             required
           ></Input>
-          <Input
+          <DatePicker
+            name="registrationDate"
+            placeholder="Select a date..."
+            {...props}
+          ></DatePicker>
+          {/* <Input
             name="registrationDate"
             control={control}
             label={localize("registration_date")}
             required
-          />
+          /> */}
           <Input
             name="address"
             control={control}

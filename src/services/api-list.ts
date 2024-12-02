@@ -9,6 +9,7 @@ export const api = {
       get: "/org",
     },
     fiscalyear: {
+      postAllFiscalyear:"/fiscalyear",
       getFiscalyearPagination: "/fiscalyear/all",
     },
     telephone_allowance: {
